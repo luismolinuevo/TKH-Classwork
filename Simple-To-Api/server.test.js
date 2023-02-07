@@ -15,7 +15,7 @@ describe("Just tsting the server", function() {
             })
         });
 
-        if("should be able to create a new todo", function(done) {
+        it("should be able to create a new todo", function(done) {
             request(server).post("/todo?admin=true").send({
                 todo: "Clean the garage"
             }).set("Accept", "application/json").expect(200).end(function(err, response) {
@@ -29,7 +29,7 @@ describe("Just tsting the server", function() {
             })
         });
 
-        if("should be able to create a new todo", function(done) {
+        it("should be able to edit a todo with a id", function(done) {
             request(server).put("/todo/:todo?admin=true")
             .set("Accept", "application/json").expect(200).end(function(err, response) {
                 if(err) {
@@ -43,7 +43,7 @@ describe("Just tsting the server", function() {
         });
 
 
-        if("should be able to create a new todo", function(done) {
+        it("should be able to delete a todo with a id", function(done) {
             request(server).delete("/todo/:todo?admin=true")
                 .set("Accept", "application/json").expect(200).end(function(err, response) {
                 if(err) {
@@ -56,7 +56,7 @@ describe("Just tsting the server", function() {
             })
         });
 
-        if("should be able to create a new todo", function(done) {
+        it("should be able to get todo with a id", function(done) {
             request(server).get("/todo/:todo?admin=true")
                 .set("Accept", "application/json").expect(200).end(function(err, response) {
                 if(err) {
@@ -72,11 +72,4 @@ describe("Just tsting the server", function() {
 
 
     })
-
-    // describe("Testing the /todo route", function(){ //check if user is unauthorized
-    //     describe("Testing the /todo route", function(){ //check if user is unauthorized
-
-    //     });
-
-    // })
 })

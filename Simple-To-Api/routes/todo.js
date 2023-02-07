@@ -43,20 +43,6 @@ export default function setupTodoRouter(db) {
     })
   })
 
-  router.delete("/:todo", function(req, res){
-    const todo = req.params.todo;
-    console.log(todo)
-    //take param, find its index in the array of todos, index it and change its value to whatever the user sent in the request
-    //find index of todo
-    const todoIndex = db.data.todos.findIndex(currentTodo => currentTodo.id === todo)
-    // db.data.todos[todoIndex].name = req.body.todo;
-    response.status(200).json({
-      //Set our response to have a status of 200 (OK!) and to respond with JSON
-      success: true,
-      todos: db.data.todoIndex, //Returns the todos from our DB
-    });
-  })
-
   router.get("/:todo", function (request, response) {
     const todo = request.params.todo;
 
@@ -68,19 +54,17 @@ export default function setupTodoRouter(db) {
     });
   });
   
-  // router.get("/:todo", function(req, res){
-  //   const todo = req.params.todo;
-  //   console.log(todo)
-  //   //take param, find its index in the array of todos, index it and change its value to whatever the user sent in the request
-  //   //find index of todo
-  //   const todoIndex = db.data.todos.findIndex(currentTodo => currentTodo.id === todo)
-  //   // db.data.todos[todoIndex].name = req.body.todo;
-  //   // db.data.todos.splice(todoIndex, 1);
-  //   db.write();
-  //   // db.delete();
-  //   res.status(200).json({
-  //     success: true
-  //   })
-  // })
+  router.get("/:todo", function(req, res){
+    const todo = req.params.todo;
+    console.log(todo)
+
+    const todoIndex = db.data.todos.findIndex(currentTodo => currentTodo.id === todo)
+    db.data.todos.splice(todoIndex, 1);
+    db.write();
+    res.status(200).json({
+      success: true
+    })
+  });
+
   return router;
 }

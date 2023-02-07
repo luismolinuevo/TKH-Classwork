@@ -18,13 +18,10 @@ export default async function() {
     await db.write();
     //Instantiate our express application
     const app = express();
-    //Use Builtin middleware to extract JSON data from the body of any request made to the server
+    //middlewares
     app.use(express.json());
-    // create a write stream (in append mode)
     app.use(morgan('tiny'))
     app.use("/todo", function(req, res, next)  {
-    // console.log("Hello middleware!");
-    // next();
     if(req.query.admin === "true") {  //add ?admin=true to be able to add to do
         next();
     } else {
@@ -33,11 +30,5 @@ export default async function() {
     })
     app.use("/todo", todoRouter(db));
 
-        
-
     return app;
 };
-
-// const server =await createServer();
-
-// server.get("/sdfsdfdsfdsfd", sdfdsfdsfdsfsfsfdsf);
