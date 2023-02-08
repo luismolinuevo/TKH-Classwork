@@ -54,7 +54,7 @@ export default function setupTodoRouter(db) {
     });
   });
   
-  router.get("/:todo", function(req, res){
+  router.delete("/:todo", function(req, res){
     const todo = req.params.todo;
     console.log(todo)
 
